@@ -1,17 +1,18 @@
 package Lab2;
 
 import java.util.ArrayList;
-import java.util.List;
-public class Section implements Element{
+
+public class Section extends Element{
 
     protected String title;
-    protected List<Element> elementList;
-
     public Section(String title) {
         this.title = title;
         elementList = new ArrayList<>();
     }
-
+    public Section(Section other){
+        this.title = other.title;
+        this.elementList = new ArrayList<>(other.elementList);
+    }
     @Override
     public void print() {
         System.out.println(title);
@@ -19,20 +20,10 @@ public class Section implements Element{
                 elementList) {
             element.print();
         }
+}
+    @Override
+    public Element clone() {
+        return new Section(this);
     }
 
-    @Override
-    public void add(Element e) {
-        elementList.add(e);
-    }
-
-    @Override
-    public void remove(Element e) {
-        elementList.remove(e);
-    }
-
-    @Override
-    public Element get(int index) {
-        return elementList.get(index);
-    }
 }
